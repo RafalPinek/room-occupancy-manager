@@ -58,4 +58,25 @@ public class RoomAppIT {
         assertEquals(expectedEconomyTotal, hotelUsage.economy().total().amount());
     }
 
+    @Test
+    public void shouldReceiveBadRequest() throws Exception {
+        // given
+        int invalidPremiumCount = -2;
+        int invalidEconomyCount = -3;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(String.format(LOCAL_URL_PATTERN, port, context, invalidPremiumCount, invalidEconomyCount)))
+                .timeout(Duration.of(10, SECONDS))
+                .GET()
+                .build();
+
+        // when
+        HttpResponse<String> response = HttpClient.newBuilder()
+                .build()
+                .send(request, HttpResponse.BodyHandlers.ofString());
+
+        // then
+        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
 }

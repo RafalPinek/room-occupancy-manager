@@ -30,4 +30,22 @@ public class PotentialGuestTest {
         // then no exception
     }
 
+    @Test
+    public void shouldWantsPremiumOnly() {
+        // when
+        PotentialGuest potentialGuest = new PotentialGuest(BigDecimal.valueOf(300));
+
+        // then
+        Assertions.assertTrue(potentialGuest.wantsPremiumOnly());
+    }
+
+    @Test
+    public void shouldDontWantPremiumOnly() {
+        // when
+        PotentialGuest potentialGuest = new PotentialGuest(BigDecimal.valueOf(40));
+
+        // then
+        Assertions.assertFalse(potentialGuest.wantsPremiumOnly());
+    }
+
 }
