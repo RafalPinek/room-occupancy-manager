@@ -1,6 +1,5 @@
 package org.pienkowski.rafal.room.allocation;
 
-import groovy.util.logging.Slf4j;
 import org.pienkowski.rafal.room.api.HotelUsage;
 import org.pienkowski.rafal.room.policy.RoomsAllocationPolicy;
 import org.slf4j.Logger;
@@ -11,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-@Slf4j
 public class HotelService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HotelService.class);

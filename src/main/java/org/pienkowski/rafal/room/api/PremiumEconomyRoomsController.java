@@ -1,5 +1,9 @@
 package org.pienkowski.rafal.room.api;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.pienkowski.rafal.room.allocation.HotelService;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +24,16 @@ class PremiumEconomyRoomsController {
         this.hotelService = hotelService;
     }
 
+    @ApiOperation(value = "Allocates potential guests in hotel and retrieves statistics.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully allocated guests"),
+            @ApiResponse(code = 400, message = "Provided parameters are invalid"),
+            @ApiResponse(code = 500, message = "Application failed to process the request")
+    })
     @GetMapping(value = "/allocate")
-    HotelUsage calculateHotelUsage(@NonNull @RequestParam("premium") Integer premiumCount,
-                                   @NonNull @RequestParam("economy") Integer economyCount,
+    HotelUsage calculateHotelUsage(@ApiParam("free premium rooms count") @NonNull @RequestParam("premium") Integer premiumCount,
+                                   @ApiParam("free economy rooms count") @NonNull @RequestParam("economy") Integer economyCount,
+                                   @ApiParam("potential guests list, represented by the amount they willing to pay")
                                    @NonNull @RequestParam("potential-guests") List<BigDecimal> potentialGuests) {
         return hotelService.allocate(potentialGuests, premiumCount, economyCount);
     }

@@ -1,6 +1,5 @@
 package org.pienkowski.rafal.room.allocation;
 
-import groovy.util.logging.Slf4j;
 import org.pienkowski.rafal.room.HotelConsts;
 import org.pienkowski.rafal.room.api.HotelUsage;
 import org.pienkowski.rafal.room.api.Money;
@@ -15,7 +14,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@Slf4j
 class GuestsMapper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GuestsMapper.class);
